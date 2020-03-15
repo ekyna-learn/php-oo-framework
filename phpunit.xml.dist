@@ -1,0 +1,65 @@
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
+        backupGlobals="true"
+        backupStaticAttributes="true"
+        cacheResult="true"
+        cacheTokens="false"
+        colors="false"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        forceCoversAnnotation="false"
+        printerClass="PHPUnit\TextUI\ResultPrinter"
+        processIsolation="false"
+        stopOnError="true"
+        stopOnFailure="true"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        stopOnRisky="false"
+        testSuiteLoaderClass="PHPUnit\Runner\StandardTestSuiteLoader"
+        timeoutForSmallTests="1"
+        timeoutForMediumTests="10"
+        timeoutForLargeTests="60"
+        verbose="false">
+
+    <testsuites>
+        <testsuite name="App">
+            <directory>tests/App</directory>
+        </testsuite>
+        <testsuite name="Form">
+            <directory>tests/Form</directory>
+        </testsuite>
+        <testsuite name="Http">
+            <directory>tests/Http</directory>
+        </testsuite>
+        <testsuite name="Persistence">
+            <directory>tests/Persistence</directory>
+        </testsuite>
+        <testsuite name="Service">
+            <directory>tests/Service</directory>
+        </testsuite>
+        <testsuite name="Kernel">
+            <file>tests/Kernel.php</file>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Form</directory>
+            <directory suffix=".php">./src/Http</directory>
+            <directory suffix=".php">./src/Persistence</directory>
+            <directory suffix=".php">./src/Service</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <env name="DB_MEMORY" value="1"/>
+        <env name="DB_HOST" value="localhost"/>
+        <env name="DB_PORT" value="3306"/>
+        <env name="DB_USER" value="root"/>
+        <env name="DB_PWD" value="root"/>
+        <env name="DB_NAME" value="framework_test"/>
+    </php>
+
+</phpunit>

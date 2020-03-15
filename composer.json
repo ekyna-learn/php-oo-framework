@@ -1,0 +1,27 @@
+{
+    "name": "ekyna-learn/php-oo-framework",
+    "description": "Build a framework with PHP",
+    "authors": [
+        {
+            "name": "Etienne Dauvergne",
+            "email": "learn@ekyna.com"
+        }
+    ],
+    "require": {
+        "ext-pdo": "*",
+        "twig/twig": "^3.0",
+        "symfony/property-access": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "symfony/dom-crawler": "^5.0",
+        "symfony/css-selector": "^5.0",
+        "masterminds/html5": "^2.7"
+    }
+}
