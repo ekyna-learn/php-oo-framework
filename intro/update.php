@@ -10,10 +10,6 @@ use App\Repository\UserRepository;
 $repository = new UserRepository($connection);
 
 // Utiliser cette instance pour récupérer l'utilisateur à afficher.
-// L'identifiant de l'utilisateur à afficher peut être récupéré dans la variable globale $_GET['id']
-// Contrôler la valeur de l'identifiant (nombre entier supérieur à zéro).
-// Si l'identifiant n'est pas valide (c'est sans doute qu'un lien est mal formatté dans un autre fichier PHP),
-// rediriger l'internaute ou afficher un message d'erreur.
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if (0 >= $id) {
     http_response_code(302);
@@ -23,27 +19,19 @@ if (0 >= $id) {
 
 $user = $repository->findOneById($id);
 
-// Contrôler si le formulaire à été soumis, en vérfiant la valeur du champ de type 'hidden'.
-// On vérifie donc si l'index 'user' existe dans le tableau $_POST (données soumises
-// par le formulaire) et si la valeur associée à cet index est égale à 'user'
-if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
-    // (Si le formulaire a été soumis)
-    // Utiliser les mutateurs (méthodes set* de la classe \App\Entity\User)
-    // pour mettre à jour l'utilisateur avec les données du formulaire
-    // Exemple: $user->setEmail($_POST['email']);
-    $user->setEmail($_POST['email']);
-    $user->setName($_POST['name']);
-    if (isset($_POST['birthday']) && !empty($_POST['birthday'])) {
-        $user->setBirthday(new \DateTime($_POST['birthday']));
-    } else {
-        $user->setBirthday(null);
-    }
-    if (isset($_POST['active']) && $_POST['active'] == 1) {
-        $user->setActive(true);
-    } else {
-        $user->setActive(false);
-    }
+// $userForm est défini dans boot.php
 
+// Définit la donnée à manipuler (l'instance de la clas User)
+$userForm->setData($user);
+
+// Définit l'action (ce fichier + identifiant de l'utilisateut)
+$userForm->setAction('update.php?id=' . $id);
+
+// Lit les données de la requête HTTP
+$userForm->bindRequest($_POST);
+
+// Contrôler si le formulaire à été soumis
+if ($userForm->isSubmitted()) {
     // Créer une instance de la classe \App\Manager\UserManager
     $manager = new UserManager($connection);
 
@@ -104,41 +92,12 @@ if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
                 Utiliateur introuvable
             </div>
 
-            <?php } else { ?>
-            <!-- Sinon, afficher le formulaire de mise à jour de l'utilisateur -->
-            <!-- Ajouter l'identifiant de l'utilisateur dans l'attribut 'action' du formulaire -->
-            <form action="update.php?id=<?php echo $user->getId(); ?>" method="post">
-                <!-- Champ masqué pour déterminer si le formulaire a été soumis -->
-                <input type="hidden" name="user" value="user">
-                <!-- Champ "Email" -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                           value="<?php echo $user->getEmail(); ?>" required="required">
-                </div>
-                <!-- Champ "Nom" -->
-                <div class="form-group">
-                    <label for="name">Nom</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nom"
-                           value="<?php echo $user->getName(); ?>" required="required">
-                </div>
-                <!-- Champ "Date de naissance" -->
-                <div class="form-group">
-                    <label for="birthday">Date de naissance</label>
-                    <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Date de naissance"
-                           value="<?php echo $user->getBirthday() ? $user->getBirthday()->format('Y-m-d') : ''; ?>">
-                </div>
-                <!-- Champ "Actif" -->
-                <div class="form-group form-check">
-                    <!-- Ajouter l'attribut « checked="checked" » pour ne pas être cochée par défaut -->
-                    <input type="checkbox" class="form-check-input" id="active" name="active" value="1"
-                        <?php echo $user->isActive() ? 'checked="checked' : ''; ?>>
-                    <label for="active">Actif</label>
-                </div>
-                <!-- Boutton de soumission -->
-                <button type="submit" class="btn btn-primary">Modifier</button>
-            </form>
-            <?php } ?>
+            <?php
+            } else {
+                // Sinon, afficher le formulaire de mise à jour de l'utilisateur
+                echo $userForm->render();
+            }
+            ?>
 
         </main>
     </div>

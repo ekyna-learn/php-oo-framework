@@ -9,26 +9,19 @@ use App\Manager\UserManager;
 // Créer une instance de la classe \App\Entity\User
 $user = new User();
 
-// Contrôler si le formulaire à été soumis, en vérfiant la valeur du champ de type 'hidden'.
-// On vérifie donc si l'index 'user' existe dans le tableau $_POST (données soumises
-// par le formulaire) et si la valeur associée à cet index est égale à 'user'
-if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
-    // (Si le formulaire a été soumis)
-    // Utiliser les mutateurs (méthodes set* de la classe \App\Entity\User)
-    // pour mettre à jour l'utilisateur avec les données du formulaire
-    $user->setEmail($_POST['email']);
-    $user->setName($_POST['name']);
-    if (isset($_POST['birthday']) && !empty($_POST['birthday'])) {
-        $user->setBirthday(new \DateTime($_POST['birthday']));
-    } else {
-        $user->setBirthday(null);
-    }
-    if (isset($_POST['active']) && $_POST['active'] == 1) {
-        $user->setActive(true);
-    } else {
-        $user->setActive(false);
-    }
+// $userForm est défini dans boot.php
 
+// Définit la donnée à manipuler (l'instance de la clas User)
+$userForm->setData($user);
+
+// Définit l'action (ce fichier)
+$userForm->setAction('create.php');
+
+// Lit les données de la requête HTTP
+$userForm->bindRequest($_POST);
+
+// Contrôler si le formulaire à été soumis
+if ($userForm->isSubmitted()) {
     // Créer une instance de la classe \App\Manager\UserManager
     $manager = new UserManager($connection);
 
@@ -70,33 +63,7 @@ if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
             </div>
 
             <!-- Formulaire de création d'utilisateur -->
-            <form action="create.php" method="post">
-                <!-- Champ masqué pour déterminer si le formulaire a été soumis -->
-                <input type="hidden" name="user" value="user">
-                <!-- Champ "Email" -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="" required="required">
-                </div>
-                <!-- Champ "Nom" -->
-                <div class="form-group">
-                    <label for="name">Nom</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nom" value="" required="required">
-                </div>
-                <!-- Champ "Date de naissance" -->
-                <div class="form-group">
-                    <label for="birthday">Date de naissance</label>
-                    <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Date de naissance" value="">
-                </div>
-                <!-- Champ "Actif" -->
-                <div class="form-group form-check">
-                    <!-- Ajouter l'attribut « checked="checked" » pour ne pas être cochée par défaut -->
-                    <input type="checkbox" class="form-check-input" id="active" name="active" value="1">
-                    <label for="active">Actif</label>
-                </div>
-                <!-- Boutton de soumission -->
-                <button type="submit" class="btn btn-primary">Ajouter</button>
-            </form>
+            <?php echo $userForm->render(); ?>
 
         </main>
     </div>

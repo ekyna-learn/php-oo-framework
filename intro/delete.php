@@ -5,15 +5,13 @@ require __DIR__ . '/boot.php';
 
 use App\Manager\UserManager;
 use App\Repository\UserRepository;
+use Form\Field\CheckboxField;
+use Form\Form;
 
 // Créer une instance de la classe \App\Repository\UserRepository
 $repository = new UserRepository($connection);
 
 // Utiliser cette instance pour récupérer l'utilisateur à afficher.
-// L'identifiant de l'utilisateur à afficher peut être récupéré dans la variable globale $_GET['id']
-// Contrôler la valeur de l'identifiant (nombre entier supérieur à zéro).
-// Si l'identifiant n'est pas valide (c'est sans doute qu'un lien est mal formatté dans un autre fichier PHP),
-// rediriger l'internaute ou afficher un message d'erreur.
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if (0 >= $id) {
     http_response_code(302);
@@ -23,10 +21,23 @@ if (0 >= $id) {
 
 $user = $repository->findOneById($id);
 
-// Contrôler si le formulaire à été soumis, en vérfiant la valeur du champ de type 'hidden'.
-// On vérifie donc si l'index 'user' existe dans le tableau $_POST (données soumises
-// par le formulaire) et si la valeur associée à cet index est égale à 'user'.
-if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
+// Créé un objet comme données à manipuler par le formulaire
+$confirm = new \stdClass();
+$confirm->confirmed = false;
+
+// Créé un formulaire de suppression
+$form = new Form('delete', 'delete.php?id=' . $id);
+$form
+    ->addField(new CheckboxField('confirmed', 'Confirmer la suppression ?', [
+        'required' => true,
+    ]))
+    ->setData($confirm);
+
+// Lit les données de la requête HTTP
+$form->bindRequest($_POST);
+
+// Contrôler si le formulaire à été soumis et que l'utilisateur a coché la case
+if ($form->isSubmitted() && $confirm->confirmed) {
     // (Si le formulaire a été soumis)
     // Créer une instance de la classe \App\Manager\UserManager
     $manager = new UserManager($connection);
@@ -84,21 +95,12 @@ if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
                 Utiliateur introuvable
             </div>
 
-            <?php } else { ?>
-            <!-- Sinon, afficher le formulaire de suppression de l'utilisateur -->
-            <!-- Ajouter l'identifiant de l'utilisateur dans l'attribut 'action' du formulaire -->
-            <form action="delete.php?id=<?php echo $user->getId(); ?>" method="post">
-                <!-- Champ masqué pour déterminer si le formulaire a été soumis -->
-                <input type="hidden" name="user" value="user">
-                <!-- Case à cocher pour confirmer la suppression -->
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="confirmed" name="confirmed" value="1" required="required">
-                    <label for="confirmed">Confirmer la suppression ?</label>
-                </div>
-                <!-- Boutton de soumission -->
-                <button type="submit" class="btn btn-danger">Supprimer</button>
-            </form>
-            <?php } ?>
+            <?php
+            } else {
+                // Sinon, afficher le formulaire de suppression de l'utilisateur
+                echo $form->render();
+            }
+            ?>
         </main>
     </div>
 </div>
