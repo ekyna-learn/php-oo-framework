@@ -7,24 +7,41 @@ use App\Entity\User;
 use App\Manager\UserManager;
 
 // Créer une instance de la classe \App\Entity\User
+$user = new User();
 
 // Contrôler si le formulaire à été soumis, en vérfiant la valeur du champ de type 'hidden'.
 // On vérifie donc si l'index 'user' existe dans le tableau $_POST (données soumises
 // par le formulaire) et si la valeur associée à cet index est égale à 'user'
-
+if (array_key_exists('user', $_POST) && $_POST['user'] === 'user') {
     // (Si le formulaire a été soumis)
     // Utiliser les mutateurs (méthodes set* de la classe \App\Entity\User)
     // pour mettre à jour l'utilisateur avec les données du formulaire
-    // Exemple: $user->setEmail($_POST['email']);
+    $user->setEmail($_POST['email']);
+    $user->setName($_POST['name']);
+    if (isset($_POST['birthday']) && !empty($_POST['birthday'])) {
+        $user->setBirthday(new \DateTime($_POST['birthday']));
+    } else {
+        $user->setBirthday(null);
+    }
+    if (isset($_POST['active']) && $_POST['active'] == 1) {
+        $user->setActive(true);
+    } else {
+        $user->setActive(false);
+    }
 
     // Créer une instance de la classe \App\Manager\UserManager
+    $manager = new UserManager($connection);
 
     // Utiliser ce 'manager' pour insérer l'utilisateur dans la base de données
+    $manager->persist($user);
 
     // Si l'insertion dans la base de donnée a réussi,
     // rediriger vers le détail de l'utilisateur (read.php?id= ???) à l'aide du code suivant
     // (voir la page Astuces (Tips) de la documentation pour un exemple de redirection)
-
+    http_response_code(302);
+    header('Location: read.php?id=' . $user->getId());
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="fr">

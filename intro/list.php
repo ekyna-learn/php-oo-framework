@@ -6,8 +6,10 @@ require __DIR__ . '/boot.php';
 use App\Repository\UserRepository;
 
 // Créer une instance de la classe \App\Repository\UserRepository
+$repository = new UserRepository($connection);
 
 // Utiliser cette instance pour récupérer la liste des utilisateurs
+$users = $repository->findAll();
 
 // Plus bas dans le code HTML (dans la balise <table>), afficher la liste des utilisateurs
 
@@ -50,28 +52,31 @@ use App\Repository\UserRepository;
                 <tbody>
 
                 <!-- Début ligne utilisateur (code HTML à répéter pour chaque utilisateur) -->
+                <?php foreach ($users as $user) { ?>
                 <tr>
                     <th scope="row">
-                        1 <!-- Identifiant de l'utilisateur -->
+                        <!-- Identifiant de l'utilisateur -->
+                        <?php echo $user->getId(); ?>
                     </th>
                     <td>
                         <!-- Lien vers la page "Détail de l'utilisateur" -->
-                        <a href="read.php?id=1">
+                        <a href="read.php?id=<?php echo $user->getId(); ?>">
                             <!-- Adresse email de l'utilisateur -->
-                            example@example.org
+                            <?php echo $user->getEmail(); ?>
                         </a>
                     </td>
                     <td>
                         <!-- Lien vers la page "Modifier l'utilisateur" -->
-                        <a href="update.php?id=1" class="btn btn-sm btn-warning">
+                        <a href="update.php?id=<?php echo $user->getId(); ?>" class="btn btn-sm btn-warning">
                             Modifier
                         </a>
                         <!-- Lien vers la page "Supprimer l'utilisateur" -->
-                        <a href="delete.php?id=1" class="btn btn-sm btn-danger">
+                        <a href="delete.php?id=<?php echo $user->getId(); ?>" class="btn btn-sm btn-danger">
                             Supprimer
                         </a>
                     </td>
                 </tr>
+                <?php } ?>
                 <!-- Fin ligne utilisateur -->
 
                 </tbody>

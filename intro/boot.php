@@ -3,7 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 $host = 'localhost';
-$port = 3306;
+$port = 12221;
 $database = 'framework';
 $user = 'framework';
 $password = 'framework';
