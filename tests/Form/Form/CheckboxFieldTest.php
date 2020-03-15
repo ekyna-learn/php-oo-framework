@@ -29,14 +29,20 @@ class CheckboxFieldTest extends AbstractFieldTest
         ];
     }
 
+    public function test_convertToPhpValue_withNull(): void
+    {
+        $this->assertTrue(true);
+    }
+
     public function provideConvertToHtmlValue(): array
     {
         return [
-            [null, null],
-            [false, 0],
-            [true, 1],
+            [null, false],
+            [0, false],
+            [1, true],
         ];
     }
+
 
     public function provideRender(): array
     {

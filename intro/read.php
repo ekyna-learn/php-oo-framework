@@ -36,6 +36,7 @@ use App\Repository\UserRepository;
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Liste des utilisateurs</h1>
+                <!-- Masquer ce calque (div) si l'utilisateur est introuvable -->
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <!-- Lien vers la page "Modifier l'utiliateur" -->
                     <!-- Ajouter l'identifiant de l'utilisateur dans l'attribut 'href' du lien -->

@@ -4,6 +4,7 @@
 require __DIR__ . '/boot.php';
 
 use App\Entity\User;
+use App\Manager\UserManager;
 
 // Créer une instance de la classe \App\Entity\User
 
@@ -72,7 +73,7 @@ use App\Entity\User;
                 </div>
                 <!-- Champ "Actif" -->
                 <div class="form-group form-check">
-                    <!-- value à '0' pour ne pas être cochée par défaut -->
+                    <!-- Ajouter l'attribut « checked="checked" » pour ne pas être cochée par défaut -->
                     <input type="checkbox" class="form-check-input" id="active" name="active" value="1">
                     <label for="active">Actif</label>
                 </div>

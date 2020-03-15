@@ -30,10 +30,12 @@ class UserManagerTest extends DatabaseTestCase
     {
         $this->skipIfMethodIsNotDefined('persist');
 
+        Database::loadDataset('dataset1');
+
         $manager = $this->createManager();
 
         $map = [
-            'id'       => 1,
+            'id'       => 3,
             'email'    => 'test@example.org',
             'password' => 'ABC123',
             'name'     => 'Mr Test',
@@ -52,9 +54,9 @@ class UserManagerTest extends DatabaseTestCase
 
         $manager->persist($user);
 
-        $this->assertEquals(1, $user->getId());
+        $this->assertEquals(3, $user->getId());
 
-        $statement = Database::getConnection()->query('SELECT * FROM user WHERE id=1 LIMIT 1');
+        $statement = Database::getConnection()->query('SELECT * FROM user WHERE id=3 LIMIT 1');
         $data = $statement->fetch(\PDO::FETCH_ASSOC);
         $this->assertNotFalse($data, "$this->class::insert() does not insert user in database.");
 
@@ -110,6 +112,8 @@ class UserManagerTest extends DatabaseTestCase
     public function test_remove():void
     {
         $this->skipIfMethodIsNotDefined('remove');
+
+        Database::loadDataset('dataset1');
 
         /** @var \App\Entity\User $user */
         $user = new $this->userClass();

@@ -59,6 +59,8 @@ Vous pourrez initialiser l'auto-chargement de classe en ajoutant la ligne suivan
 require __DIR__ . '/vendor/autoload.php';
 ```
 
+Dans PhpMyAdmin (ou autre gestionnaire de bases de données) créez une base de données nommée &laquo; framework &raquo; 
+(par exemple) et importez ce fichier : [framework.sql](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/framework.sql).
 
 ### Avant de commencer
 

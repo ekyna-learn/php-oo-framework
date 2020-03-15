@@ -90,6 +90,13 @@ abstract class AbstractFieldTest extends TestCase
                 );
             }
         }
+    }
+
+    abstract public function provideConvertToPhpValue(): array;
+
+    public function test_convertToPhpValue_withNull(): void
+    {
+        $this->skipIfMethodIsNotDefined('convertToPhPValue');
 
         $this->assertNull(
             $this->create('test', 'test', ['required' => false])->convertToPhpValue(null),
@@ -100,8 +107,6 @@ abstract class AbstractFieldTest extends TestCase
 
         $this->create('test', 'test', ['required' => true])->convertToPhpValue(null);
     }
-
-    abstract public function provideConvertToPhpValue(): array;
 
     public function test_convertToHtmlValue(): void
     {
@@ -191,12 +196,12 @@ abstract class AbstractFieldTest extends TestCase
     protected function assertWidgetAttributes(Crawler $crawler, FieldInterface $field, $value): void
     {
         $this->assertAttributes($crawler, [
-            'type'        => 'text',
-            'class'       => 'form-control',
-            'id'          => $field->getName(),
-            'name'        => $field->getName(),
+            'type'  => 'text',
+            'class' => 'form-control',
+            'id'    => $field->getName(),
+            'name'  => $field->getName(),
             //'placeholder' => $this->label,
-            'value'       => $value,
+            'value' => $value,
         ]);
     }
 

@@ -24,8 +24,10 @@
         verbose="false">
 
     <testsuites>
-        <testsuite name="App">
-            <directory>tests/App</directory>
+        <testsuite name="Intro">
+            <file>test/app/Entity/UserTest</file>
+            <file>test/app/Repository/UserRepositoryTest</file>
+            <file>test/app/Manager/UserManagerTest</file>
         </testsuite>
         <testsuite name="Form">
             <directory>tests/Form</directory>

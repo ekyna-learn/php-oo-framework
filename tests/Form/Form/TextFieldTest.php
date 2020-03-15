@@ -21,7 +21,7 @@ class TextFieldTest extends AbstractFieldTest
     public function provideConvertToHtmlValue(): array
     {
         return [
-            [null, null],
+            [null, ''],
             ['test', 'test'],
             ['   test   ', 'test'],
         ];

@@ -3,6 +3,7 @@
 // Le fichier boot.php contient la configuration et la connection à la base de données
 require __DIR__ . '/boot.php';
 
+use App\Manager\UserManager;
 use App\Repository\UserRepository;
 
 // Créer une instance de la classe \App\Repository\UserRepository
@@ -12,9 +13,6 @@ use App\Repository\UserRepository;
 // Contrôler la valeur de l'identifiant (nombre entier supérieur à zéro).
 // Si l'identifiant n'est pas valide (c'est sans doute qu'un lien est mal formatté dans un autre fichier PHP),
 // rediriger l'internaute ou afficher un message d'erreur.
-
-// Plus bas dans le code HTML, afficher le détail de l'utilisateur
-// ou le message d'erreur si l'utilisateur est introuvable.
 
 // Contrôler si le formulaire à été soumis, en vérfiant la valeur du champ de type 'hidden'.
 // On vérifie donc si l'index 'user' existe dans le tableau $_POST (données soumises
@@ -56,6 +54,7 @@ use App\Repository\UserRepository;
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Modifier l'utilisateur</h1>
+                <!-- Masquer ce calque (div) si l'utilisateur est introuvable -->
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <!-- Lien vers la page "Liste des utiliateurs" -->
                     <a href="list.php" class="btn btn-default">
@@ -97,7 +96,7 @@ use App\Repository\UserRepository;
                 </div>
                 <!-- Champ "Actif" -->
                 <div class="form-group form-check">
-                    <!-- value à '0' pour ne pas être cochée par défaut -->
+                    <!-- Ajouter l'attribut « checked="checked" » pour ne pas être cochée par défaut -->
                     <input type="checkbox" class="form-check-input" id="active" name="active" value="1">
                     <label for="active">Actif</label>
                 </div>

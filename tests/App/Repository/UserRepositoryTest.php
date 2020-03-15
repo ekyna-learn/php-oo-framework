@@ -34,18 +34,6 @@ class UserRepositoryTest extends DatabaseTestCase
         $this->assertJaneDoe($repository->findOneById(2));
     }
 
-    public function test_findOneByEmail(): void
-    {
-        $this->assertMethod('findOneByEmail', self::PUBLIC, [['name' => 'email', 'type' => 'string']], $this->userClass, true);
-
-        Database::loadDataset('dataset1');
-
-        $repository = $this->createRepository();
-
-        $this->assertJohnDoe($repository->findOneByEmail('john.doe@example.org'));
-        $this->assertJaneDoe($repository->findOneByEmail('jane.doe@example.org'));
-    }
-
     public function test_findAll(): void
     {
         $this->assertMethod('findAll', self::PUBLIC, [], 'array');

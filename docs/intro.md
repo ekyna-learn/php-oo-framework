@@ -3,6 +3,9 @@ Introduction
 
 Le dossier _intro_ contient l'intégration HTML/CSS de notre administration.
 
+Configurez l'accès à votre base de données dans le fichier _intro/boot.php_, vous 
+pourrez ensuite utiliser la variable __$connection__ dans les autres fichiers.
+
 Le dossier _src_ contient le code de nos composants et de l'application (car au final, 
 nous n'aurons plus besoin du dossier _intro_).
 
@@ -30,11 +33,17 @@ vous indique que l'argument (paramètre d'une méthode) ou la valeur de retour p
 nuls. Comparez l'interface __EntityInterface__ (le fichier existe déjà) et sa représentation 
 dans le diagramme.
 
+Vous aurez besoin de manipuler des instances de la class DateTime 
+([voir la page Tips](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/tips.md)).
+
+Pour lancer un serveur web, dans votre terminal, placez-vous dans le dossier intro avec la commande : ```cd intro```, avant 
+de lancer votre serveur web avec la commande : ```php -S localhost:8000```.
+
+Pour lancer les tests unitaires, dans un terminal, placez-vous à la racine du projet et lancez la commande :
+```vendor/bin/phpunit --testsuite Intro``` _(GitBash uniquement)_.
+
 Une fois la classe __User__ développée et les autres préparées, développez les fichiers suivants.
 (Ces fichiers contiennent des commentaires pour vous guider).
-
-_Dans votre terminal, placez-vous dans le dossier intro avec la commande : ```cd intro```, avant 
-de lancer votre serveur web avec la commande : ```php -S localhost:8000```._
 
 * intro/create.php
 
