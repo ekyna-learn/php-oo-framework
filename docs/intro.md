@@ -16,7 +16,7 @@ vous développerez leurs méthodes au fur et à mesure, lorsque vous en aurez be
 
 ### Diagramme de classes
 
-![Diagramme de classes](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/intro-class-diagram.png)
+![Diagramme de classes](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/intro-class-diagram.png)
 
 | Classe | Fichier |
 | --- | --- |
@@ -30,11 +30,11 @@ vous indique que l'argument (paramètre d'une méthode) ou la valeur de retour p
 nuls. Comparez l'interface __EntityInterface__ (le fichier existe déjà) et sa représentation 
 dans le diagramme.
 
-Une fois la classe User développée et les autres préparées, développez les fichiers suivants.
+Une fois la classe __User__ développée et les autres préparées, développez les fichiers suivants.
 (Ces fichiers contiennent des commentaires pour vous guider).
 
-_Dans votre terminal, placez-vous dans le dossier intro avec la commande (```cd intro```) avant 
-de lancer votre serveur web avec la commande (```php -S localhost:8000```)._
+_Dans votre terminal, placez-vous dans le dossier intro avec la commande : ```cd intro```, avant 
+de lancer votre serveur web avec la commande : ```php -S localhost:8000```._
 
 * intro/create.php
 
@@ -71,4 +71,4 @@ Vous trouverez une correction de cette partie dans la branche
 [intro](https://github.com/ekyna-learn/php-oo-framework/tree/intro) du dépôt original.
 
 Nous allons pouvoir passer à la suite et développer notre premier composant : 
-[Formulaire](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/form.md).
+[Formulaire](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/form.md).

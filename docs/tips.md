@@ -33,52 +33,52 @@ Voici quelques exemples de codes PHP qui vous seront utiles pour la réalisation
 
 Créer un objet PHP __DateTime__ d'après une date au format _&laquo; base de données &raquo;_
 
-    ```php
-    // Date au format « base de données »
-    $string = '2020-03-16';
-  
-    // Objet PHP DateTime
-    $date = new \DateTime($string);
-  
-    // Formater un objet DateTime pour affichage (format français)
-    echo $date->format('d/m/Y'); // Affiche « 16/03/2000 »
-  
-    // Formater un objet DateTime pour insertion dans la base de données
-    $dbValue = $date->format('Y-m-d'); // Equivaut à $dbValue = '2020-03-16';
-  
-    // Créer une instance de la classe DateTime peut lever une exception 
-    // si la chaîne de caractères passée en paramètre a un format non valide
-    try {
-        $date = new \DateTime("Attention : ça va boguer !");
-    } catch (\Exception $e) {
-        // Intercepte l'exception
-        echo "Date non valide";
-    }
-    ```
+```php
+// Date au format « base de données »
+$string = '2020-03-16';
+
+// Objet PHP DateTime
+$date = new \DateTime($string);
+
+// Formater un objet DateTime pour affichage (format français)
+echo $date->format('d/m/Y'); // Affiche « 16/03/2000 »
+
+// Formater un objet DateTime pour insertion dans la base de données
+$dbValue = $date->format('Y-m-d'); // Equivaut à $dbValue = '2020-03-16';
+
+// Créer une instance de la classe DateTime peut lever une exception 
+// si la chaîne de caractères passée en paramètre a un format non valide
+try {
+    $date = new \DateTime("Attention : ça va boguer !");
+} catch (\Exception $e) {
+    // Intercepte l'exception
+    echo "Date non valide";
+}
+```
 
 #### Redirection HTTP
 
 Rediriger l'internaute vers une URL _(ou un fichier PHP)_
 
-    ```php
-    // Défini un code HTTP de rédirection temporaire
-    http_response_code(302);
-  
-    // Défini l'url vers laquelle l'internaute doit être redirigé
-    // Attention à l'orthographe de « Location:  », respecter les majuscule/minuscules,
-    // le deux points et l'espace.
-    header('Location: fichier-cible.php');
-  
-    // OU avec une URL
-    header('Location: /chemin/vers/la/page');
-  
-    // On utilise « exit » pour terminer le script afin que la redirection soit effective
-    exit;
-  
-    // Attention : si un 'echo' a été executé avant ce code de redirection, celle-ci n'aura pas lieu.
-    // Ce code est a executer avant un quelconque affichage pour être fonctionnel.
-    // Un simple espace au début du fichier (avant la balide « <?php ») empêchera la redirection.
-    ```
+```php
+// Défini un code HTTP de rédirection temporaire
+http_response_code(302);
+
+// Défini l'url vers laquelle l'internaute doit être redirigé
+// Attention à l'orthographe de « Location:  », respecter les majuscule/minuscules,
+// le deux points et l'espace.
+header('Location: fichier-cible.php');
+
+// OU avec une URL
+header('Location: /chemin/vers/la/page');
+
+// On utilise « exit » pour terminer le script afin que la redirection soit effective
+exit;
+
+// Attention : si un 'echo' a été executé avant ce code de redirection, celle-ci n'aura pas lieu.
+// Ce code est a executer avant un quelconque affichage pour être fonctionnel.
+// Un simple espace au début du fichier (avant la balide « <?php ») empêchera la redirection.
+```
 
 #### Utiliser le composant PropertyAccess
 

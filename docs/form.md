@@ -18,7 +18,7 @@ l'approche et les traitements à développer seront similaires, mais vous ne ser
 
 ### Diagramme de classes
 
-![Diagramme de classes](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/form-class-diagram.png)
+![Diagramme de classes](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/form-class-diagram.png)
 
 :warning: Le type &laquo; mixed &raquo; signifie que la donnée peut être de types 
 différents : on accepte autant les chaînes de caractères que les nombres, les 
@@ -140,7 +140,7 @@ terminal windows classique)_.
 
     vendor/bin/phpunit --testsuite Form
 
-Voir la page [Tests unitaires](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/test.md) 
+Voir la page [Tests unitaires](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/test.md) 
 pour comprendre le résultat de cette commande.
 
 
@@ -172,11 +172,8 @@ classe __AbstractField__ dont elle est censé hériter.
 Créez le fichier _src/Form/Field/TextField.php_, et y définir la classe 
 __TextField__ qui implémente l'interface __FieldInterface__.
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('textfield-class-1').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textfield-class-1" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -218,15 +215,14 @@ class TextField implements FieldInterface
 }
 ```  
 
-</div>
-</div>
+</details>
 
 Ajoutez les propriétés privées (__name__, __label__ et __options__) et développez 
 le constructeur et les accesseurs (méthodes __get*__) d'après le diagramme.
 
 #### Méthode convertToPhpValue(data)
 
-![Conversion des données](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/form-field-convert-data.png)
+![Conversion des données](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/form-field-convert-data.png)
 
 Cette méthode doit convertir la donnée du formulaire en donnée PHP. Ici 
 ce n'est pas compliqué : que ce soit en HTML (formulaire) ou en PHP, il 
@@ -255,11 +251,8 @@ echo $field->convertToPhpValue('super test');
 echo $field->convertToPhpValue('       super test      ');
 ```
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('textfield-convert-to-php').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textfield-convert-to-php" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -284,8 +277,7 @@ class TextField implements FieldInterface
 }
 ```
 
-</div>
-</div>
+</details>
 
 #### Méthode convertToHtmlValue(data)
 
@@ -294,11 +286,8 @@ Cette méthode converti la donnée de l'objet en donner à afficher dans le form
 [trim](https://www.php.net/manual/fr/function.trim.php), mais inutile de contrôler 
 une valeur nulle.
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('textfield-convert-to-html').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textfield-convert-to-html" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -317,8 +306,7 @@ class TextField implements FieldInterface
 }
 ```
 
-</div>
-</div>
+</details>
 
 #### Méthode render(data)
 
@@ -372,11 +360,8 @@ Dans le constructeur de votre classe __TextField__, nous allons ajouter des
 options par défaut grâce à la fonction 
 [array_replace](https://www.php.net/manual/fr/function.array-replace.php) :
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('constructor').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textfield-constructor" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 // src/Form/Field/TextField.php
@@ -405,8 +390,7 @@ class TextField
 
 :bulb: _En savoir plus sur l'[operateur ??](https://www.php.net/manual/fr/language.operators.comparison.php#language.operators.comparison.coalesce)._
 
-</div>
-</div>
+</details>
 
 Nous pouvons tester l'effet de 
 [array_replace](https://www.php.net/manual/fr/function.array-replace.php)
@@ -454,11 +438,8 @@ use InvalidArgumentException;
 throw new InvalidArgumentException("Message décrivant l'erreur");
 ``` 
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('required-value-exception').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="required-value-exception" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -491,8 +472,7 @@ class TextField implements FieldInterface
 }
 ```
 
-</div>
-</div>
+</details>
 
 ##### Analyse des rendus des différents champs
 
@@ -581,11 +561,8 @@ cette méthode.
 :bulb: _Une classe ou une méthode abstraite se déclare en ajoutant le mot clé ```abstract``` 
 au début de sa définition._
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('abstract-field-class-1').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="abstract-field-class-1" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -660,8 +637,7 @@ abstract class AbstractField implements FieldInterface
 }
 ```
 
-</div>
-</div>
+</details>
 
 :bulb: _Le fait de réorganiser la méthode __render__ en plusieurs méthodes 
 (__renderLabel__ et __renderWidget__) s'appelle la refactoration ou 
@@ -674,11 +650,8 @@ filles vont pouvoir spécialiser ces méthodes en les redéfinissant._
 La classe __TextField__ hérite maintenant de la classe __AbstractField__ et 
 (re)définit la méthode __renderWidget()__.
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('textfield-class-2').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textfield-class-2" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -701,8 +674,7 @@ class TextField extends AbstractField
 }
 ```
 
-</div>
-</div>
+</details>
 
 Nous avons donc simplifié notre classe __TextField__ en déplacant la logique 
 commune à tous les champs dans la classe mère __AbstractField__.
@@ -734,11 +706,8 @@ On souhaite obtenir la chaîne de caractères suivante :
 
 Dans votre fichier de test, développez un algorithme réalisant cette conversion.
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('array-to-attributes').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="array-to-attributes" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -766,8 +735,7 @@ echo $output;
 
 ```
 
-</div>
-</div>
+</details>
 
 Maintenant que vous avez développé l'algorithme, déplacez-le dans une 
 méthode _protégée_ __renderAttributes(array $attributes)__ de la 
@@ -775,11 +743,8 @@ classe __AbstractField__. Profitez-en pour ajouter à l'argument
 __$attributes__ les options __required__ et __disabled__ (si toutefois
 leur valeur vaut _TRUE_).
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('abstract-field-class-2').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="abstract-field-class-2" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -812,17 +777,13 @@ abstract class AbstractField implements FieldInterface
 }
 ```
 
-</div>
-</div>
+</details>
 
 Vous pouvez maintenant utiliser cette méthode pour améliorer le code de la
 méthod __TextField::renderWidget__. 
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('textfield-class-3').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textfield-class-3" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -847,8 +808,7 @@ class TextField extends AbstractField
 }
 ```
 
-</div>
-</div>
+</details>
 
 :buld: _Le fait d'avoir créé une méthode __renderAttributes()__ pour isoler le rendu des 
 attributs d'une balise constitue une nouvelle __refactorisation__ de notre code._ 
@@ -861,11 +821,8 @@ Créez la classe __TextareaField__ héritant de la classe __TextField__ et redé
 méthode __renderWidget()__ pour obtenir un rendu de balise 
 ```<textarea>...</textarea>``` plutôt qu'une balide ```<input>```.
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('textarea-class').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="textarea-class" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -888,9 +845,7 @@ class TextareaField extends TextField
 }
 ```
 
-</div>
-</div>
-
+</details>
 
 ### Classe CheckboxField
 
@@ -911,11 +866,8 @@ Cette méthode utilisera la fonction array_replace comme dans le constructeur. A
 cette méthode dans le constructeur pour initialiser la propriété __options__ comme auparavant 
 (on conserve le comportement actuel en déplacant du code). 
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('resolve-options').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="resolve-options" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -948,8 +900,7 @@ abstract class AbstractField implements FieldInterface
 }
 ```
 
-</div>
-</div>
+</details>
 
 Vous pouvez maintenant créer le classe __CheckboxField__.
 
@@ -991,11 +942,8 @@ ajouter l'attribut ```checked="checked"``` si $data vaut TRUE.
 La méthode __render()__ devra inverser les positions du libellé (```<Label>...```) 
 et du widget (```<input ...>```).
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('checkbox-field-class').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="checkbox-field-class" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1063,14 +1011,13 @@ class CheckboxField extends AbstractField
 
 ```
 
-</div>
-</div>
+</details>
 
 ### Classe DateTimeField
 
 Créez la classe __DateTimeField__.
 
-:bulb: _[Voir la page Tips](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/tips.md) 
+:bulb: _[Voir la page Tips](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/tips.md) 
 pour manipuler la classe __DateTime__._
 
 La méthode __convertToPhpValue()__ doit :
@@ -1091,11 +1038,8 @@ convertir la date en chaîne de caractères (format 'Y-m-d').
 
 La méthode __renderWidget()__ aura la particularité de définir l'attribut ```type="date"```. 
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('datetime-field-class').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="datetime-field-class" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1156,8 +1100,7 @@ class DateTimeField extends AbstractField
 
 ```
 
-</div>
-</div>
+</details>
 
 :thumbsup: Vous avez fini de développer les classes représentant les champs HTML ! :clap: 
 
@@ -1183,11 +1126,8 @@ Créez la classe __Form__ qui implémente l'interface __FormInterface__.
 * Développez les mutateurs __setAction()__ et __setData()__. Et l'accesseur 
 __isSubmitted()__ (qui renvoie la valeur de la propriété __submitted__).
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-1').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-1" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1254,8 +1194,7 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
+</details>
 
 #### Méthode addField()
 
@@ -1268,11 +1207,8 @@ __field__ au tableau de la propriété __fields__.
 Cette méthode devra lever un exception InvalidArgumentException si l'on tente d'ajouter un champ
 ayant le même nom (_FieldInterface::getName()_) qu'un autre champ déjà ajouté.
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-addField').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-addField" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1303,14 +1239,13 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
+</details>
 
 #### PropertyAccess
 
 Avant d'aborder le développement des méthodes __render()__, __bindRequest()__
 et __isSubmitted()__, veuillez vous familiariser avec le composant PropertyAccess 
-[Voir page Tips](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/tips.md).
+[Voir page Tips](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/tips.md).
 
 #### Méthode render()
 
@@ -1329,11 +1264,8 @@ et ```{form.name}``` par les valeurs des propriétés et en insérant le rendu c
 </form>
 ```
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-render-1').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-render-1" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1369,8 +1301,7 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
+</details>
 
 Comme vous pouvez le constater, on passe la valeur NULL à la méthode 
 FieldInterface::render() pour ne pas rencontrer d'erreur. Nous allons 
@@ -1407,12 +1338,8 @@ utilisez le componsant __PropertyAccess__ pour récupérer la valeur à
 partir de l'objet stocké dans la propriété __data__ du formulaire. 
 Utilise le champ pour convertir cette donnée en HTML (méthode __convertToHtmlValue()__). 
 
-
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-render-2').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-render-2" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1459,8 +1386,7 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
+</details>
 
 #### Modification du constructeur
 
@@ -1469,11 +1395,8 @@ créé une instance de __PropertyAccessor__. Cette instance nous sera aussi util
 la méthode __bindRequest()__. Déplacez la création de l'instance de __PropertyAccessor__
 dans le constructeur, et utilisez la propriété accessor dans la méthode __render()__. 
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-accessor').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-accessor" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1518,8 +1441,7 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
+</details>
 
 #### Méthode assertConfigured()
 
@@ -1532,12 +1454,8 @@ __data__ est vide).
 Nous allons donc ajouter une créer une méthode _privée_ __assertConfigured()__
 qui lève une exception (classe __LogicException__) dans ces 2 cas.
 
-
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-assertConfigured').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-assertConfigured" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1567,8 +1485,7 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
+</details>
 
 Une fois cette méthode fonctionelle (vérifier dans votre fichier test.php :wink:), 
 ajouter un appel à cette méthode au début de la méthode __render()__. On ne 
@@ -1591,11 +1508,8 @@ associatif des données soumises.
 
 :bulb: _Utilisez la fonction [array_key_exists](https://www.php.net/manual/fr/function.array-key-exists.php) !_
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-bindRequest').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-bindRequest" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 <?php
@@ -1633,9 +1547,7 @@ class Form implements FormInterface
 
 ```
 
-</div>
-</div>
-
+</details>
 
 Pour vous assurrer que la classe Form est fonctionnelle, complètez votre fichier de test :
 * Ajoutez d'autres champs (en appelant la méthode __addField()__).
@@ -1646,11 +1558,8 @@ Pour vous assurrer que la classe Form est fonctionnelle, complètez votre fichie
       
 Testez entièrement votre formulaire !
 
-:warning: <a href="javascript:void(0)" onclick="document.getElementById('form-class-bindRequest').style.display='block';">
-    Afficher la correction
-</a>
-<div style="background-color:#f6f8fa;border-radius:3px;padding:3px;">
-<div id="form-class-bindRequest" style="display:none;">
+<details>
+<summary>:warning: Afficher la correction</summary>
 
 ```php
 // test.php
@@ -1690,22 +1599,21 @@ if ($form->isSubmitted()) {
 echo $form->render();
 ```
 
-</div>
-</div>
+</details>
 
 :thumbsup: Vous avez fini de développer le composant Form !!! :clap: 
 
-Il est temps de l'utiliser ce nouveau composant dans notre application !
+Il est temps d'utiliser ce nouveau composant dans notre application !
 
 Modifiez les fichiers :
 * intro/create.php
 * intro/update.php
 * intro/delete.php
 
-Vous trouverez une correction complète de ce composant et des modification des 
+Vous trouverez une correction complète de ce composant et des modifications des 
 fichiers de la partie _Intro_ dans la branche 
 [form](https://github.com/ekyna-learn/php-oo-framework/tree/form)
 du dépôt original.
 
 Un autre composant à développer vous attend : passez à la partie 
-[Persistance](https://github.com/ekyna-learn/php-oo-framework/blob/master/doc/persistence.md).
+[Persistance](https://github.com/ekyna-learn/php-oo-framework/blob/master/docs/persistence.md).
